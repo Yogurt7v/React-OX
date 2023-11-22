@@ -8,6 +8,13 @@ export const App = () => {
 	let isGameEnded = false;
 	let isDraw = false;
 
+	// if (isDraw === false && isGameEnded === true) {
+	// 	return `Победа ${currentPlayer}`;
+	// }
+	// if (isDraw === false && isGameEnded === false) {
+	// 	return `Ходит ${currentPlayer}`;
+	// }
+
 	return (
 		<>
 			<div className="App">
