@@ -10,14 +10,12 @@ export const App = () => {
 	let [isGameEnded, setIsGameEnded] = useState(false);
 	let [isDraw, setIsDraw] = useState(false);
 
-	setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
-	setTurnCount(turnCount + 1);
-	setIsGameEnded = () => {
-		if (turnCount === 9) {
-			setIsDraw(true);
-			isGameEnded = true;
-		}
-	};
+	// setIsDraw(() => {
+	// 	if (turnCount === 9) {
+	// 		setIsDraw(true);
+	// 		setIsGameEnded(true);
+	// 	}
+	// });
 
 	// if (isDraw === false && isGameEnded === true) {
 	// 	return `Победа ${currentPlayer}`;
@@ -25,22 +23,28 @@ export const App = () => {
 	// if (isDraw === false && isGameEnded === false) {
 	// 	return `Ходит ${currentPlayer}`;
 	// }
+	function restart() {
+		setArr(['', '', '', '', '', '', '', '', '']);
+		setTurnCount(1);
+		setCurrentPlayer('X');
+	}
 
 	return (
 		<>
 			<div className="App">
 				<div className="App-container">
 					<header className="App-header">Крестики - Нолики</header>
-					<Information gameStatus={(isGameEnded, isDraw)}></Information>
+					<Information isDraw={isDraw}></Information>
 					<Field
 						arr={arr}
+						setArr={setArr}
 						turnCount={turnCount}
-						symbol1={setCurrentPlayer}
+						setTurnCount={setTurnCount}
+						symbol={currentPlayer}
+						setSymbol={setCurrentPlayer}
+						restart={restart}
 					></Field>
-					<button
-						onClick={() => setArr(['', '', '', '', '', '', '', '', ''])}
-						className="App-restart"
-					>
+					<button onClick={() => restart()} className="App-restart">
 						Restart
 					</button>
 				</div>

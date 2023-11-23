@@ -1,30 +1,47 @@
 import style from './field.module.css';
 
-export const Field = (props) => {
-	let a = props.arr;
-	let s = props.symbol;
-	let t = props.turnCount;
-
-	function setArr(index) {
-		if (!t % 2 === 0) {
-			s = 'X';
-			t++;
+export const Field = ({
+	arr,
+	setArr,
+	turnCount,
+	setTurnCount,
+	symbol,
+	setSymbol,
+	restart,
+}) => {
+	function handleClick(index) {
+		if (turnCount < 9) {
+			if (arr[index] === '') {
+				arr[index] = `${symbol}`;
+				setTurnCount(turnCount + 1);
+				if (turnCount % 2 === 0) {
+					setSymbol('X');
+					setTurnCount(turnCount + 1);
+				} else {
+					setSymbol('O');
+					setTurnCount(turnCount + 1);
+				}
+			} else {
+				alert('Эта ячейка уже занята');
+			}
 		} else {
-			s = 'O';
-			t++;
+			alert('Ничья');
+			restart();
 		}
-		a[index] = `${s}`;
-		console.log(a);
+		console.log(arr);
+		console.log(turnCount);
 	}
 	return (
 		<div className={style.AppField}>
-			{props.arr.map((item, index) => (
+			{arr.map((item, index, currentPlayer) => (
 				<div
-					onClick={() => setArr(index)}
+					onClick={() => handleClick(index)}
 					key={index}
 					index={index}
-					className={style.AppFieldCell}
-				></div>
+					className={`${style.AppFieldCell} `}
+				>
+					{arr[index]}
+				</div>
 			))}
 		</div>
 	);
