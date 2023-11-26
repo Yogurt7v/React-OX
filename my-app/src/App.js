@@ -11,6 +11,8 @@ export const App = () => {
 	let [isDraw, setIsDraw] = useState(false);
 	let [message, setMessage] = useState('');
 	let [win, setWin] = useState('');
+	let [texrColor, setTextColor] = useState('black');
+	let [dooble, setDooble] = useState(false);
 
 	function restart() {
 		setArr(['', '', '', '', '', '', '', '', '']);
@@ -20,6 +22,7 @@ export const App = () => {
 		setIsGameEnded(false);
 		setMessage(`Ходит игрок ${currentPlayer}`);
 		setWin('');
+		setTextColor('black');
 	}
 
 	return (
@@ -34,6 +37,10 @@ export const App = () => {
 						isDraw={isDraw}
 						win={win}
 						setIsGameEnded={setIsGameEnded}
+						texrColor={texrColor}
+						setTextColor={setTextColor}
+						dooble={dooble}
+						setDooble={setDooble}
 					></Information>
 					<Field
 						arr={arr}

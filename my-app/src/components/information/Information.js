@@ -7,16 +7,24 @@ export const Information = ({
 	isDraw,
 	win,
 	setIsGameEnded,
+	texrColor,
+	setTextColor,
 }) => {
 	setMessage(`Ходит игрок ${currentPlayer}`);
 	if (isDraw === true) {
 		setIsGameEnded(true);
+		setTextColor('green');
 		setMessage(`Ничья`);
 	}
 	if (win !== '') {
+		setTextColor('red');
 		setMessage(`${win}`);
 		setIsGameEnded(true);
 	}
 
-	return <div className={style.Information}> {message}</div>;
+	return (
+		<div className={style.Information} style={{ color: texrColor }}>
+			{message}
+		</div>
+	);
 };
