@@ -33,24 +33,19 @@ export const App = () => {
 						currentPlayer={currentPlayer}
 						isDraw={isDraw}
 						win={win}
-						setWin={setWin}
-						isGameEnded={isGameEnded}
+						setIsGameEnded={setIsGameEnded}
 					></Information>
 					<Field
 						arr={arr}
-						setArr={setArr}
 						turnCount={turnCount}
 						setTurnCount={setTurnCount}
 						symbol={currentPlayer}
 						setSymbol={setCurrentPlayer}
 						restart={restart}
 						setIsDraw={setIsDraw}
-						message={message}
-						setMessage={setMessage}
 						win={win}
 						setWin={setWin}
 						isGameEnded={isGameEnded}
-						setIsGameEnded={setIsGameEnded}
 					></Field>
 					<button onClick={() => restart()} className="App-restart">
 						Новая игра

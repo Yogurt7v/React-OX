@@ -6,15 +6,16 @@ export const Information = ({
 	currentPlayer,
 	isDraw,
 	win,
-	setWin,
 	setIsGameEnded,
 }) => {
 	setMessage(`Ходит игрок ${currentPlayer}`);
 	if (isDraw === true) {
+		setIsGameEnded(true);
 		setMessage(`Ничья`);
 	}
 	if (win !== '') {
 		setMessage(`${win}`);
+		setIsGameEnded(true);
 	}
 
 	return <div className={style.Information}> {message}</div>;

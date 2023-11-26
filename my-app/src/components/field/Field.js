@@ -27,17 +27,15 @@ function isEqual(a, b) {
 
 export const Field = ({
 	arr,
-	setArr,
 	turnCount,
 	setTurnCount,
 	symbol,
 	setSymbol,
 	restart,
-	message,
 	setIsDraw,
-	setMessage,
 	win,
 	setWin,
+	isGameEnded,
 }) => {
 	function checkWin(arrX, arrO) {
 		if (win === '')
@@ -49,10 +47,10 @@ export const Field = ({
 				}
 			});
 	}
-	function handleClick(index, setMessage) {
+	function handleClick(index) {
 		let arrX = [];
 		let arrO = [];
-		if (turnCount < 9) {
+		if (turnCount < 9 && isGameEnded === false) {
 			if (arr[index] === '') {
 				arr[index] = `${symbol}`;
 				setTurnCount(turnCount + 1);
@@ -80,7 +78,7 @@ export const Field = ({
 
 	return (
 		<div className={style.AppField}>
-			{arr.map((item, index, currentPlayer) => (
+			{arr.map((item, index) => (
 				<div
 					onClick={() => handleClick(index)}
 					key={index}
