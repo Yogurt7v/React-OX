@@ -9,13 +9,7 @@ export const App = () => {
 	let [arr, setArr] = useState(['', '', '', '', '', '', '', '', '']);
 	let [isGameEnded, setIsGameEnded] = useState(false);
 	let [isDraw, setIsDraw] = useState(false);
-
-	// setIsDraw(() => {
-	// 	if (turnCount === 9) {
-	// 		setIsDraw(true);
-	// 		setIsGameEnded(true);
-	// 	}
-	// });
+	// let [message, setMessage] = useState('');
 
 	// if (isDraw === false && isGameEnded === true) {
 	// 	return `Победа ${currentPlayer}`;
@@ -34,7 +28,12 @@ export const App = () => {
 			<div className="App">
 				<div className="App-container">
 					<header className="App-header">Крестики - Нолики</header>
-					<Information isDraw={isDraw}></Information>
+					<Information
+						// message={message}
+						// setMessage={setMessage}
+						currentPlayer={currentPlayer}
+						isDraw={isDraw}
+					></Information>
 					<Field
 						arr={arr}
 						setArr={setArr}
@@ -43,9 +42,10 @@ export const App = () => {
 						symbol={currentPlayer}
 						setSymbol={setCurrentPlayer}
 						restart={restart}
+						setIsDraw={setIsDraw}
 					></Field>
 					<button onClick={() => restart()} className="App-restart">
-						Restart
+						Новая игра
 					</button>
 				</div>
 			</div>

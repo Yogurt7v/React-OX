@@ -8,6 +8,7 @@ export const Field = ({
 	symbol,
 	setSymbol,
 	restart,
+	setIsDraw,
 }) => {
 	function handleClick(index) {
 		if (turnCount < 9) {
@@ -25,8 +26,10 @@ export const Field = ({
 				alert('Эта ячейка уже занята');
 			}
 		} else {
-			alert('Ничья');
-			restart();
+			setIsDraw(true);
+			setTimeout(() => {
+				restart();
+			}, 3000);
 		}
 		console.log(arr);
 		console.log(turnCount);
