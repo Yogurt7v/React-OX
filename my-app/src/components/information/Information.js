@@ -1,15 +1,20 @@
 import style from './information.module.css';
 
-export const Information = ({ message, setMessage, currentPlayer, isDraw }) => {
-	// if (isDraw === false && isGameEnded === true) {
-	// 	return <div className={style.Information}>Победа {player}</div>;
-	// }
-	// if (isDraw === false && isGameEnded === false) {
-	// 	return <div className={style.Information}>Ходит {player}</div>;
-	// }
+export const Information = ({
+	message,
+	setMessage,
+	currentPlayer,
+	isDraw,
+	win,
+	setWin,
+	setIsGameEnded,
+}) => {
 	setMessage(`Ходит игрок ${currentPlayer}`);
 	if (isDraw === true) {
 		setMessage(`Ничья`);
+	}
+	if (win !== '') {
+		setMessage(`${win}`);
 	}
 
 	return <div className={style.Information}> {message}</div>;

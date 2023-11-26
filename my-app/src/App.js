@@ -7,16 +7,19 @@ export const App = () => {
 	let [currentPlayer, setCurrentPlayer] = useState('X'); // 'X' or 'O'
 	let [turnCount, setTurnCount] = useState(1);
 	let [arr, setArr] = useState(['', '', '', '', '', '', '', '', '']);
-	// let [isGameEnded, setIsGameEnded] = useState(false);
+	let [isGameEnded, setIsGameEnded] = useState(false);
 	let [isDraw, setIsDraw] = useState(false);
 	let [message, setMessage] = useState('');
+	let [win, setWin] = useState('');
 
 	function restart() {
 		setArr(['', '', '', '', '', '', '', '', '']);
 		setTurnCount(1);
 		setCurrentPlayer('X');
 		setIsDraw(false);
+		// setIsGameEnded(false);
 		setMessage(`Ходит игрок ${currentPlayer}`);
+		setWin('');
 	}
 
 	return (
@@ -29,6 +32,9 @@ export const App = () => {
 						setMessage={setMessage}
 						currentPlayer={currentPlayer}
 						isDraw={isDraw}
+						win={win}
+						setWin={setWin}
+						isGameEnded={isGameEnded}
 					></Information>
 					<Field
 						arr={arr}
@@ -41,6 +47,10 @@ export const App = () => {
 						setIsDraw={setIsDraw}
 						message={message}
 						setMessage={setMessage}
+						win={win}
+						setWin={setWin}
+						isGameEnded={isGameEnded}
+						setIsGameEnded={setIsGameEnded}
 					></Field>
 					<button onClick={() => restart()} className="App-restart">
 						Новая игра

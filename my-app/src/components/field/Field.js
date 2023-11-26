@@ -15,16 +15,13 @@ function isEqual(a, b) {
 		if (a.length !== b.length) {
 			return false;
 		}
-
 		for (var i = 0; i < a.length; i++) {
 			if (!isEqual(a[i], b[i])) {
 				return false;
 			}
 		}
-
 		return true;
 	}
-
 	return a === b;
 }
 
@@ -36,12 +33,23 @@ export const Field = ({
 	symbol,
 	setSymbol,
 	restart,
-	// setIsDraw,
 	message,
+	setIsDraw,
 	setMessage,
+	win,
+	setWin,
 }) => {
-	function handleClick(index, message, setMessage) {
-		let m = '';
+	function checkWin(arrX, arrO) {
+		if (win === '')
+			WIN_PATTERNS.forEach((item) => {
+				if (isEqual(arrX, item)) {
+					setWin('Победили крестики');
+				} else if (isEqual(arrO, item)) {
+					setWin('Победили нолики');
+				}
+			});
+	}
+	function handleClick(index, setMessage) {
 		let arrX = [];
 		let arrO = [];
 		if (turnCount < 9) {
@@ -60,27 +68,16 @@ export const Field = ({
 			}
 			arr.filter((item, index) => (item === 'X' ? arrX.push(index) : null));
 			arr.filter((item, index) => (item === 'O' ? arrO.push(index) : null));
-			WIN_PATTERNS.forEach((item) => {
-				if (isEqual(arrX, item)) {
-					m = 'Победили крестики';
-					setTimeout(() => {
-						restart();
-					}, 3000);
-				} else if (isEqual(arrO, item)) {
-					m = 'Победили нолики';
-					setTimeout(() => {
-						restart();
-					}, 3000);
-				}
-			});
-			console.log(m);
+
+			checkWin(arrX, arrO);
 		} else {
-			setMessage(`Ничья`);
+			setIsDraw(true);
 			setTimeout(() => {
 				restart();
 			}, 3000);
 		}
 	}
+
 	return (
 		<div className={style.AppField}>
 			{arr.map((item, index, currentPlayer) => (
