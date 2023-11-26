@@ -7,20 +7,16 @@ export const App = () => {
 	let [currentPlayer, setCurrentPlayer] = useState('X'); // 'X' or 'O'
 	let [turnCount, setTurnCount] = useState(1);
 	let [arr, setArr] = useState(['', '', '', '', '', '', '', '', '']);
-	let [isGameEnded, setIsGameEnded] = useState(false);
+	// let [isGameEnded, setIsGameEnded] = useState(false);
 	let [isDraw, setIsDraw] = useState(false);
-	// let [message, setMessage] = useState('');
+	let [message, setMessage] = useState('');
 
-	// if (isDraw === false && isGameEnded === true) {
-	// 	return `Победа ${currentPlayer}`;
-	// }
-	// if (isDraw === false && isGameEnded === false) {
-	// 	return `Ходит ${currentPlayer}`;
-	// }
 	function restart() {
 		setArr(['', '', '', '', '', '', '', '', '']);
 		setTurnCount(1);
 		setCurrentPlayer('X');
+		setIsDraw(false);
+		setMessage(`Ходит игрок ${currentPlayer}`);
 	}
 
 	return (
@@ -29,8 +25,8 @@ export const App = () => {
 				<div className="App-container">
 					<header className="App-header">Крестики - Нолики</header>
 					<Information
-						// message={message}
-						// setMessage={setMessage}
+						message={message}
+						setMessage={setMessage}
 						currentPlayer={currentPlayer}
 						isDraw={isDraw}
 					></Information>
