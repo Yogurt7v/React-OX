@@ -1,5 +1,13 @@
 .Information {
-	width: 300px;
+	margin: 30px auto;
+	display: flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	width: 400px;
 	height: 50px;
+	background-color: white;
+	border: 1px solid grey;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 17px 50px;
 	color: red;
 }
