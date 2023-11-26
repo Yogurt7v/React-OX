@@ -17,7 +17,7 @@ export const App = () => {
 		setTurnCount(1);
 		setCurrentPlayer('X');
 		setIsDraw(false);
-		// setIsGameEnded(false);
+		setIsGameEnded(false);
 		setMessage(`Ходит игрок ${currentPlayer}`);
 		setWin('');
 	}
