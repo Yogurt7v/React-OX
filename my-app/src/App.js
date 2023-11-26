@@ -39,6 +39,8 @@ export const App = () => {
 						setSymbol={setCurrentPlayer}
 						restart={restart}
 						setIsDraw={setIsDraw}
+						message={message}
+						setMessage={setMessage}
 					></Field>
 					<button onClick={() => restart()} className="App-restart">
 						Новая игра

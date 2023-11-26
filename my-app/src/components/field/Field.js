@@ -1,4 +1,32 @@
 import style from './field.module.css';
+const WIN_PATTERNS = [
+	[0, 1, 2],
+	[3, 4, 5],
+	[6, 7, 8], // Варианты побед по горизонтали
+	[0, 3, 6],
+	[1, 4, 7],
+	[2, 5, 8], // Варианты побед по вертикали
+	[0, 4, 8],
+	[2, 4, 6], // Варианты побед по диагонали
+];
+
+function isEqual(a, b) {
+	if (a instanceof Array && b instanceof Array) {
+		if (a.length !== b.length) {
+			return false;
+		}
+
+		for (var i = 0; i < a.length; i++) {
+			if (!isEqual(a[i], b[i])) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	return a === b;
+}
 
 export const Field = ({
 	arr,
@@ -8,9 +36,14 @@ export const Field = ({
 	symbol,
 	setSymbol,
 	restart,
-	setIsDraw,
+	// setIsDraw,
+	message,
+	setMessage,
 }) => {
-	function handleClick(index) {
+	function handleClick(index, message, setMessage) {
+		let m = '';
+		let arrX = [];
+		let arrO = [];
 		if (turnCount < 9) {
 			if (arr[index] === '') {
 				arr[index] = `${symbol}`;
@@ -25,14 +58,28 @@ export const Field = ({
 			} else {
 				alert('Эта ячейка уже занята');
 			}
+			arr.filter((item, index) => (item === 'X' ? arrX.push(index) : null));
+			arr.filter((item, index) => (item === 'O' ? arrO.push(index) : null));
+			WIN_PATTERNS.forEach((item) => {
+				if (isEqual(arrX, item)) {
+					m = 'Победили крестики';
+					setTimeout(() => {
+						restart();
+					}, 3000);
+				} else if (isEqual(arrO, item)) {
+					m = 'Победили нолики';
+					setTimeout(() => {
+						restart();
+					}, 3000);
+				}
+			});
+			console.log(m);
 		} else {
-			setIsDraw(true);
+			setMessage(`Ничья`);
 			setTimeout(() => {
 				restart();
 			}, 3000);
 		}
-		console.log(arr);
-		console.log(turnCount);
 	}
 	return (
 		<div className={style.AppField}>
