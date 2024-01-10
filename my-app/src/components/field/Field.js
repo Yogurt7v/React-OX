@@ -1,14 +1,17 @@
 import style from './field.module.css';
-const WIN_PATTERNS = [
-	[0, 1, 2],
-	[3, 4, 5],
-	[6, 7, 8], // Варианты побед по горизонтали
-	[0, 3, 6],
-	[1, 4, 7],
-	[2, 5, 8], // Варианты побед по вертикали
-	[0, 4, 8],
-	[2, 4, 6], // Варианты побед по диагонали
-];
+import { store } from '../../store';
+
+
+// const WIN_PATTERNS = [
+// 	[0, 1, 2],
+// 	[3, 4, 5],
+// 	[6, 7, 8], // Варианты побед по горизонтали
+// 	[0, 3, 6],
+// 	[1, 4, 7],
+// 	[2, 5, 8], // Варианты побед по вертикали
+// 	[0, 4, 8],
+// 	[2, 4, 6], // Варианты побед по диагонали
+// ];
 
 function isEqual(a, b) {
 	if (a instanceof Array && b instanceof Array) {
@@ -39,7 +42,7 @@ export const Field = ({
 }) => {
 	function checkWin(arrX, arrO) {
 		if (win === '')
-			WIN_PATTERNS.forEach((item) => {
+			store.WIN_PATTERNS.forEach((item) => {
 				if (isEqual(arrX, item)) {
 					setWin('Победили крестики');
 				} else if (isEqual(arrO, item)) {
@@ -74,6 +77,8 @@ export const Field = ({
 				restart();
 			}, 3000);
 		}
+
+		store.dispatch({ type: 'NEXT_TURN', payload : index });
 	}
 
 	return (

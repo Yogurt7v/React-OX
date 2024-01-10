@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import { Field } from './components/field/Field';
 import { Information } from './components/information/Information';
+import { store } from './store';
 
 export const App = () => {
 	let [currentPlayer, setCurrentPlayer] = useState('X'); // 'X' or 'O'
@@ -15,14 +16,15 @@ export const App = () => {
 	let [dooble, setDooble] = useState(false);
 
 	function restart() {
-		setArr(['', '', '', '', '', '', '', '', '']);
-		setTurnCount(1);
-		setCurrentPlayer('X');
-		setIsDraw(false);
-		setIsGameEnded(false);
-		setMessage(`Ходит игрок ${currentPlayer}`);
-		setWin('');
-		setTextColor('black');
+		store.dispatch({ type: 'RESTART' });
+		// setArr(['', '', '', '', '', '', '', '', '']);
+		// setTurnCount(1);
+		// setCurrentPlayer('X');
+		// setIsDraw(false);
+		// setIsGameEnded(false);
+		// setMessage(`Ходит игрок ${currentPlayer}`);
+		// setWin('');
+		// setTextColor('black');
 	}
 
 	return (

@@ -1,4 +1,5 @@
 import style from './information.module.css';
+import { store } from '../../store';
 
 export const Information = ({
 	message,
@@ -10,7 +11,7 @@ export const Information = ({
 	texrColor,
 	setTextColor,
 }) => {
-	setMessage(`Ходит игрок ${currentPlayer}`);
+	setMessage(`Ходит игрок ${store.currentPlayer}`);
 	if (isDraw === true) {
 		setIsGameEnded(true);
 		setTextColor('green');
