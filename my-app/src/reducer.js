@@ -1,6 +1,9 @@
-// import { useEffect } from "react";
+
+import { store } from "./store";
 
 export const initialState = {
+	arrX: [],
+	arrO: [],
 	arr : ['','','','','','','','',''],
 	turnCount : 1,
 	currentPlayer : 'X',
@@ -31,13 +34,13 @@ export const appReducer = (state = initialState, action) => {
 		}
 
 		case "ADD_INDEX_TO_ARRAY": {
-			let updatedArr = [...state.arr];
-			updatedArr[payload] = state.currentPlayer
-			let updetedCurrenUser =state.currentPlayer === "X" ? "O" : "X"
+			const newArr = [...state.arr];
+			 newArr[payload] = state.currentPlayer
+			let updetedCurrenUser = state.currentPlayer === "X" ? "O" : "X"
 
 			return {
 			  ...state,
-			  arr: updatedArr,
+				arr : newArr,
 			  turnCount: state.turnCount + 1,
 			  currentPlayer: updetedCurrenUser,
 			  message : `Ходит игрок ${updetedCurrenUser}`,
@@ -53,6 +56,9 @@ export const appReducer = (state = initialState, action) => {
 			}
 		}
 		case "DRAW":{
+			setTimeout(() => {
+				store.dispatch({ type: 'RESTART' });
+			})
 			return {
 				...state,
 				isDraw : true,

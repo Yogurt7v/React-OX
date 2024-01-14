@@ -30,7 +30,6 @@ function isEqual(a, b) {
 
 export const Field = ({
 	data,
-	restart,
 }) => {
 
 	function handleClick(index) {
@@ -58,11 +57,9 @@ export const Field = ({
 				}
 			});
 		} else {
+			alert('Игра окончена');
 			store.dispatch({ type: 'DRAW' });
 
-			setTimeout(() => {
-				restart();
-			}, 3000);
 		}
 
 	}
