@@ -2,16 +2,16 @@ import style from './field.module.css';
 import { store } from '../../store';
 
 
-// const WIN_PATTERNS = [
-// 	[0, 1, 2],
-// 	[3, 4, 5],
-// 	[6, 7, 8], // Варианты побед по горизонтали
-// 	[0, 3, 6],
-// 	[1, 4, 7],
-// 	[2, 5, 8], // Варианты побед по вертикали
-// 	[0, 4, 8],
-// 	[2, 4, 6], // Варианты побед по диагонали
-// ];
+const WIN_PATTERNS = [
+	[0, 1, 2],
+	[3, 4, 5],
+	[6, 7, 8], // Варианты побед по горизонтали
+	[0, 3, 6],
+	[1, 4, 7],
+	[2, 5, 8], // Варианты побед по вертикали
+	[0, 4, 8],
+	[2, 4, 6], // Варианты побед по диагонали
+];
 
 function isEqual(a, b) {
 	if (a instanceof Array && b instanceof Array) {
@@ -29,68 +29,54 @@ function isEqual(a, b) {
 }
 
 export const Field = ({
-	arr,
-	turnCount,
-	setTurnCount,
-	symbol,
-	setSymbol,
+	data,
 	restart,
-	setIsDraw,
-	win,
-	setWin,
-	isGameEnded,
 }) => {
-	function checkWin(arrX, arrO) {
-		if (win === '')
-			store.WIN_PATTERNS.forEach((item) => {
-				if (isEqual(arrX, item)) {
-					setWin('Победили крестики');
-				} else if (isEqual(arrO, item)) {
-					setWin('Победили нолики');
-				}
-			});
-	}
+
 	function handleClick(index) {
+
 		let arrX = [];
 		let arrO = [];
-		if (turnCount < 9 && isGameEnded === false) {
-			if (arr[index] === '') {
-				arr[index] = `${symbol}`;
-				setTurnCount(turnCount + 1);
-				if (turnCount % 2 === 0) {
-					setSymbol('X');
-					setTurnCount(turnCount + 1);
-				} else {
-					setSymbol('O');
-					setTurnCount(turnCount + 1);
-				}
+		if (data.turnCount < 9 && data.isGameEnded === false) {
+			if (data.arr[index] === '') {
+				store.dispatch({type:"ADD_INDEX_TO_ARRAY", payload: index})
+				data.arr[index] = `${data.currentPlayer}`;
+				console.log(data);
+
 			} else {
 				alert('Эта ячейка уже занята');
 			}
-			arr.filter((item, index) => (item === 'X' ? arrX.push(index) : null));
-			arr.filter((item, index) => (item === 'O' ? arrO.push(index) : null));
+			data.arr.filter((item, index) => (item === 'X' ? arrX.push(index) : null));
+			data.arr.filter((item, index) => (item === 'O' ? arrO.push(index) : null));
 
-			checkWin(arrX, arrO);
+		if (data.win === '')
+			WIN_PATTERNS.forEach((item) => {
+				if (isEqual(arrX, item)) {
+					store.dispatch({ type: 'WIN', payload: { message: "Победили крестики" } });
+				} else if (isEqual(arrO, item)) {
+					store.dispatch({ type: 'WIN', payload:{ message: "Победили нолики"} });
+				}
+			});
 		} else {
-			setIsDraw(true);
+			store.dispatch({ type: 'DRAW' });
+
 			setTimeout(() => {
 				restart();
 			}, 3000);
 		}
 
-		store.dispatch({ type: 'NEXT_TURN', payload : index });
 	}
 
 	return (
 		<div className={style.AppField}>
-			{arr.map((item, index) => (
+			{data.arr.map((item, index) => (
 				<div
 					onClick={() => handleClick(index)}
 					key={index}
 					index={index}
 					className={`${style.AppFieldCell} `}
 				>
-					{arr[index]}
+					{data.arr[index]}
 				</div>
 			))}
 		</div>

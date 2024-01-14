@@ -1,13 +1,8 @@
-import {appReducer , initialState} from './reducer'
-const createStore = (reducer, initialState) =>{
-	let state = initialState;
+import {appReducer} from './reducer'
+import { legacy_createStore as createStore } from 'redux'
 
-	return {
-		dispatch : (action) => {
-			state = reducer(state, action)
-		},
-		getState: () => state
-	}
-}
 
-export const store = createStore(appReducer, initialState)
+// export const store = createStore(appReducer)
+// const composeEnhancers = window.REDUX_DEVTOOLS_EXTENSION && window.REDUX_DEVTOOLS_EXTENSION()
+ export const store = createStore(appReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+ );
