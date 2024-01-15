@@ -1,3 +1,6 @@
 {
-	"recommendations": ["codeium.codeium"]
+	"recommendations": [
+		"codeium.codeium",
+		"xr0master.webstorm-intellij-darcula-theme"
+	]
 }
