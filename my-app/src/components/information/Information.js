@@ -1,5 +1,4 @@
 import style from './information.module.css';
-import { store } from '../../store';
 
 export const Information = ({
 	data,
