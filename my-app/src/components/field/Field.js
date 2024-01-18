@@ -1,5 +1,6 @@
 import style from './field.module.css';
 import { store } from '../../store';
+import { useSelector } from 'react-redux';
 
 
 const WIN_PATTERNS = [
@@ -28,27 +29,30 @@ function isEqual(a, b) {
 	return a === b;
 }
 
-export const Field = ({
-	data,
-}) => {
+export const Field = ({ restart }) => {
+
+	const turnCount = useSelector((state) => state.turnCount);
+	const isGameEnded = useSelector((state) => state.isGameEnded);
+	const arr = useSelector((state) => state.arr);
+	const currentPlayer = useSelector((state) => state.currentPlayer);
+	const win = useSelector((state) => state.win);
 
 	function handleClick(index) {
 
 		let arrX = [];
 		let arrO = [];
-		if (data.turnCount < 9 && data.isGameEnded === false) {
-			if (data.arr[index] === '') {
+		if (turnCount < 9 && isGameEnded === false) {
+			if (arr[index] === '') {
 				store.dispatch({type:"ADD_INDEX_TO_ARRAY", payload: index})
-				data.arr[index] = `${data.currentPlayer}`;
-				console.log(data);
+				arr[index] = `${currentPlayer}`;
 
 			} else {
 				alert('Эта ячейка уже занята');
 			}
-			data.arr.filter((item, index) => (item === 'X' ? arrX.push(index) : null));
-			data.arr.filter((item, index) => (item === 'O' ? arrO.push(index) : null));
+			arr.filter((item, index) => (item === 'X' ? arrX.push(index) : null));
+			arr.filter((item, index) => (item === 'O' ? arrO.push(index) : null));
 
-		if (data.win === '')
+		if (win === '')
 			WIN_PATTERNS.forEach((item) => {
 				if (isEqual(arrX, item)) {
 					store.dispatch({ type: 'WIN', payload: { message: "Победили крестики" } });
@@ -66,14 +70,14 @@ export const Field = ({
 
 	return (
 		<div className={style.AppField}>
-			{data.arr.map((item, index) => (
+			{arr.map((item, index) => (
 				<div
 					onClick={() => handleClick(index)}
 					key={index}
 					index={index}
 					className={`${style.AppFieldCell} `}
 				>
-					{data.arr[index]}
+					{arr[index]}
 				</div>
 			))}
 		</div>

@@ -23,7 +23,18 @@ export const appReducer = (state = initialState, action) => {
 	switch (type) {
 
 		case "RESTART":{
-			return initialState
+			return {
+				arrX: [],
+				arrO: [],
+				arr : ['','','','','','','','',''],
+				turnCount : 1,
+				currentPlayer : 'X',
+				isDraw : false,
+				win : '',
+				isGameEnded : false,
+				textColor : 'black',
+				message : "Ходит игрок X",
+			}
 		}
 
 		case "ADD_TURNCOUNT":{
@@ -34,7 +45,7 @@ export const appReducer = (state = initialState, action) => {
 		}
 
 		case "ADD_INDEX_TO_ARRAY": {
-			const newArr = [...state.arr];
+			let newArr = [...state.arr];
 			 newArr[payload] = state.currentPlayer
 			let updetedCurrenUser = state.currentPlayer === "X" ? "O" : "X"
 
@@ -58,7 +69,7 @@ export const appReducer = (state = initialState, action) => {
 		case "DRAW":{
 			setTimeout(() => {
 				store.dispatch({ type: 'RESTART' });
-			})
+			},2000)
 			return {
 				...state,
 				isDraw : true,
