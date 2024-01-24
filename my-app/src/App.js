@@ -1,5 +1,3 @@
-// import { useEffect, useState } from 'react';
-// import './App.css';
 import { Field } from './components/field/Field';
 import { Information } from './components/information/Information';
 import { store } from './store';
@@ -20,7 +18,7 @@ export const App = () => {
 					<Field
 						restart={restart}
 					></Field>
-					<button onClick={() => restart()} className="flex mx-auto justify-center items-center h-12 w-96 text-black text-2xl tracking-wider bg-white border-0.3px border-grey shadow-lg" >
+					<button onClick={() => restart()} className="flex mx-auto justify-center items-center h-12 w-96 text-black text-2xl tracking-wider bg-white border border-gray-500  shadow-gray-500 shadow-md" >
 						Новая игра
 					</button>
 				</div>

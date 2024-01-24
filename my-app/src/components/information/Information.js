@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-// import style from './information.module.css';
 
 
 export const Information = () => {
