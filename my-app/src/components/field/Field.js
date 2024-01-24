@@ -1,4 +1,4 @@
-import style from './field.module.css';
+// import style from './field.module.css';
 import { store } from '../../store';
 import { useSelector } from 'react-redux';
 
@@ -69,13 +69,13 @@ export const Field = ({ restart }) => {
 	}
 
 	return (
-		<div className={style.AppField}>
+		<div className="AppField">
 			{arr.map((item, index) => (
 				<div
 					onClick={() => handleClick(index)}
 					key={index}
 					index={index}
-					className={`${style.AppFieldCell} `}
+					className={"AppFieldCell"}
 				>
 					{arr[index]}
 				</div>

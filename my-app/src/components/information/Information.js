@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import style from './information.module.css';
+// import style from './information.module.css';
 
 
 export const Information = () => {
@@ -8,8 +8,9 @@ export const Information = () => {
 	const color = useSelector((state) => state.textColor);
 
 	return (
-		<div className={style.Information} style={{ color: color }}>
+		<div className="mt-8 flex m-auto justify-center items-center text-center h-12 w-96 bg-white border border-gray-500  shadow-gray-500 shadow-md" style={{ color: color }}>
 			{message}
 		</div>
 	);
 };
+

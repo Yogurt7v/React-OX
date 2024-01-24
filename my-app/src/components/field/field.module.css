@@ -24,7 +24,7 @@
 	background: #000;
 } */
 
-.AppField {
+/* .AppField {
 	background-color: rgba(0, 0, 0, 0.2);
 	margin: 50px auto;
 	vertical-align: center;
@@ -36,18 +36,18 @@
 	grid-gap: 2px;
 	border-radius: 4px;
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 17px 50px;
-}
+} */
 
-.AppFieldCell {
+/* .AppFieldCell {
 	background-color: white;
 	transition: background-color 0.5s;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 40px;
-}
-.AppField :hover {
+} */
+/* .AppField :hover {
 	background-color: rgba(0, 0, 0, 0);
 	transition: background-color 0.5s;
 	cursor: pointer;
-}
+} */
