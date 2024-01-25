@@ -1,15 +1,23 @@
-import { useSelector } from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
+const mapStateToProps = (state) => {
+	return {
+	  message: state.message,
+	  textColor: state.textColor
+	};
+  };
 
-export const Information = () => {
+class Information extends Component {
 
-	const message = useSelector((state) => state.message);
-	const color = useSelector((state) => state.textColor);
+  render() {
+    const { message, textColor } = this.props;
+    return (
+      <div className="mt-8 flex m-auto justify-center items-center text-center h-12 w-96 bg-white border border-gray-500 shadow-gray-500 shadow-md" style={{ color: textColor }}>
+        {message}
+      </div>
+    );
+  }
+}
 
-	return (
-		<div className="mt-8 flex m-auto justify-center items-center text-center h-12 w-96 bg-white border border-gray-500  shadow-gray-500 shadow-md" style={{ color: color }}>
-			{message}
-		</div>
-	);
-};
-
+export default connect(mapStateToProps)(Information);

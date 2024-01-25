@@ -1,5 +1,5 @@
-import { Field } from './components/field/Field';
-import { Information } from './components/information/Information';
+import Field from './components/field/Field';
+import Information  from './components/information/Information';
 import { store } from './store';
 
 export const App = () => {

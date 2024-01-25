@@ -1,6 +1,6 @@
-
+import React, {Component} from 'react';
 import { store } from '../../store';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 
 const WIN_PATTERNS = [
@@ -29,30 +29,39 @@ function isEqual(a, b) {
 	return a === b;
 }
 
-export const Field = ({ restart }) => {
+const getFromState = (state) => {
+	return {
+		turnCount: state.turnCount,
+		isGameEnded: state.isGameEnded,
+		arr: state.arr,
+		currentPlayer: state.currentPlayer,
+		win: state.win
 
-	const turnCount = useSelector((state) => state.turnCount);
-	const isGameEnded = useSelector((state) => state.isGameEnded);
-	const arr = useSelector((state) => state.arr);
-	const currentPlayer = useSelector((state) => state.currentPlayer);
-	const win = useSelector((state) => state.win);
+	  };
+}
 
-	function handleClick(index) {
+class Field extends Component{
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	  }
+
+	handleClick(index) {
 
 		let arrX = [];
 		let arrO = [];
-		if (turnCount < 9 && isGameEnded === false) {
-			if (arr[index] === '') {
+		if (this.props.turnCount < 9 && this.props.isGameEnded === false) {
+			if (this.props.arr[index] === '') {
 				store.dispatch({type:"ADD_INDEX_TO_ARRAY", payload: index})
-				arr[index] = `${currentPlayer}`;
+				this.props.arr[index] = `${this.props.currentPlayer}`;
 
 			} else {
 				alert('Эта ячейка уже занята');
 			}
-			arr.filter((item, index) => (item === 'X' ? arrX.push(index) : null));
-			arr.filter((item, index) => (item === 'O' ? arrO.push(index) : null));
+			this.props.arr.filter((item, index) => (item === 'X' ? arrX.push(index) : null));
+			this.props.arr.filter((item, index) => (item === 'O' ? arrO.push(index) : null));
 
-		if (win === '')
+		if (this.props.win === '')
 			WIN_PATTERNS.forEach((item) => {
 				if (isEqual(arrX, item)) {
 					store.dispatch({ type: 'WIN', payload: { message: "Победили крестики" } });
@@ -67,19 +76,23 @@ export const Field = ({ restart }) => {
 		}
 
 	}
-
-	return (
-		<div className="AppField">
-			{arr.map((item, index) => (
+	render(){
+		const { handleClick } = this;
+		return (
+			<div className="AppField">
+			{this.props.arr.map((item, index) => (
 				<div
 					onClick={() => handleClick(index)}
 					key={index}
 					index={index}
 					className={"AppFieldCell"}
 				>
-					{arr[index]}
+					{this.props.arr[index]}
 				</div>
 			))}
-		</div>
-	);
-};
+			</div>
+		)
+	}
+}
+
+export default connect(getFromState)(Field);
